@@ -1,10 +1,5 @@
-input 1
 #name
-input 2
 //input[@name='username']
-input 3
 .form-control.third
-input 4
 //input[@lesson-two='four']
-input 5
 //input[@class='form-control second']
