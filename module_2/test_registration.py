@@ -1,6 +1,5 @@
 from selenium import webdriver
 from sys import argv
-import time
 
 script_name, link = argv
 
