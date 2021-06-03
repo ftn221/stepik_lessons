@@ -15,6 +15,3 @@ def test_check_the_same_language(browser):
         assert button == "Añadir al carrito", f"Your text in the button is '{button}'"
     else:
         assert False, "Your language is not from list"
-
-# Андрей, не смог придумать, как здесь можно использовать концепцию AAA, так как начало и конец
-# теста вынесены в фикстуру и требуется много assert для проверки каждого текста в кнопке
