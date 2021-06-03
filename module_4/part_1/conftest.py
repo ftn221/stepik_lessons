@@ -1,7 +1,6 @@
 import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-import time
 
 #добавляем распознавание текста в коммандную строку
 def pytest_addoption(parser):
@@ -20,5 +19,4 @@ def browser(request):
 
     browser.get(link)
     yield browser
-    time.sleep(5)
     browser.quit()
