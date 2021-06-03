@@ -1,27 +1,22 @@
 import pytest
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 
 #добавляем распознавание текста в коммандную строку
 def pytest_addoption(parser):
-    parser.addoption('--language', action='store', default=None,
-                     help="Choose language: ru, en-gb, es, fr")
+    parser.addoption('--language', action='store', default="en-GB",
+                     help="Choose language: ru, en-GB, es, fr")
 
 #фикстура открытия/закрытия браузера, а также проверка на этапе формирования ссылки, что подставляется верный параметр language
 @pytest.fixture(scope="function")
 def browser(request):
+    link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/"
+    user_language = request.config.getoption("language")
 
-    language_param = request.config.getoption("language")
-    if language_param == "ru":
-        link = f"http://selenium1py.pythonanywhere.com/{language_param}/catalogue/coders-at-work_207/"
-    elif language_param == "en-gb":
-        link = f"http://selenium1py.pythonanywhere.com/{language_param}/catalogue/coders-at-work_207/"
-    elif language_param == "es":
-        link = f"http://selenium1py.pythonanywhere.com/{language_param}/catalogue/coders-at-work_207/"
-    elif language_param == "fr":
-        link = f"http://selenium1py.pythonanywhere.com/{language_param}/catalogue/coders-at-work_207/"
-    else:
-        assert False, "Language in command line is not ru, en-gb, fr or es"
-    browser = webdriver.Chrome()
+    options = Options()
+    options.add_experimental_option('prefs', {'intl.accept_languages': user_language})
+    browser = webdriver.Chrome(options=options)
+
     browser.get(link)
     yield browser
     browser.quit()
