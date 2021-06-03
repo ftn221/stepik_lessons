@@ -3,8 +3,8 @@ from selenium import webdriver
 
 #добавляем распознавание текста в коммандную строку
 def pytest_addoption(parser):
-    parser.addoption('--language', action='store', default=None,
-                     help="Choose language: ru, en-gb, es, fr")
+    parser.addoption('--language', action='store', default="en-GB",
+                     help="Choose language: ru, en-GB, es, fr")
 
 #добавляем распознавание текста в коммандную строку
 def pytest_addoption(parser):
@@ -14,11 +14,13 @@ def pytest_addoption(parser):
 #фикстура открытия/закрытия браузера, а также проверка на этапе формирования ссылки, что подставляется верный параметр language
 @pytest.fixture(scope="function")
 def browser(request):
+    link = ""
+    user_language = request.config.getoption("language")
 
-    language_param = request.config.getoption("language")
-    browser_param = request.config.getoption("browser_name")
+    options = Options()
+    options.add_experimental_option('prefs', {'intl.accept_languages': user_language})
+    browser = webdriver.Chrome(options=options)
 
-    browser = webdriver.Chrome()
     browser.get(link)
     yield browser
     browser.quit()
