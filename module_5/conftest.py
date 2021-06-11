@@ -17,3 +17,8 @@ def browser(request):
     browser = webdriver.Chrome(options=options)
     yield browser
     browser.quit()
+
+@pytest.fixture(scope="function")
+def language(request):
+    user_language = request.config.getoption("language")
+    return user_language
