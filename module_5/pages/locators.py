@@ -1,11 +1,13 @@
 from selenium.webdriver.common.by import By
 
+
 class BasePageLocators():
     LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
     LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inc")
     BASKET_LINK = (By.CSS_SELECTOR, '.basket-mini.pull-right > .btn-group a')
     USER_ICON = (By.CSS_SELECTOR, ".icon-user")
     CHARS = 'abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'
+
 
 class LoginPageLocators():
     LOGIN_URL = "http://selenium1py.pythonanywhere.com/accounts/login/"
@@ -16,9 +18,11 @@ class LoginPageLocators():
     PASSWORD_INPUT_TWO = (By.ID, 'id_registration-password2')
     REGISTRATION_SUBMIT_BUTTON = (By.NAME, 'registration_submit')
 
+
 class BasketPageLocators():
     PRODUCTS_BLOCK = (By.ID, "basket_formset")
     EMPTY_MESSAGE = (By.CSS_SELECTOR, "#content_inner p")
+
 
 class ProductPageLocators():
     ADD_BUTTON = (By.CLASS_NAME, "btn-add-to-basket")

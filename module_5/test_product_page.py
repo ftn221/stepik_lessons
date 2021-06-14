@@ -3,10 +3,11 @@ from .pages.basket_page import BasketPage
 from .pages.login_page import LoginPage
 import pytest
 
-#data
+# data
 standart_link = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/'
-#Ссылка для 5 урока, шага 2, где нужно высчитывать по формуле и вводить во всплывающее окно
+# Ссылка для 5 урока, шага 2, где нужно высчитывать по формуле и вводить во всплывающее окно
 add_in_basket_link = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/?promo=newYear"
+
 
 class TestProductPage():
     def test_check_math_on_product_page(self, browser):
@@ -23,7 +24,8 @@ class TestProductPage():
         basket_page.check_products_present()
         basket_page.check_message_basket_empty(language)
 
-    @pytest.mark.parametrize('promo_offer', ["offer0", "offer1", "offer2", "offer3", "offer4", "offer5", "offer6", pytest.param("offer7", marks=pytest.mark.xfail), "offer8", "offer9"])
+    @pytest.mark.parametrize('promo_offer', ["offer0", "offer1", "offer2", "offer3", "offer4", "offer5", "offer6",
+                                             pytest.param("offer7", marks=pytest.mark.xfail), "offer8", "offer9"])
     class TestProductPageWithParametrize():
         def test_guest_can_add_product_to_basket(self, browser, promo_offer):
             page = ProductPage(browser, f'{standart_link}?promo={promo_offer}')
@@ -49,6 +51,7 @@ class TestProductPage():
         page = ProductPage(browser, standart_link)
         page.open()
         page.message_disappeared_after_adding_product_to_basket()
+
 
 class TestUserAddToBasketFromProductPage():
     @pytest.fixture(scope='function', autouse=True)

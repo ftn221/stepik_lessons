@@ -30,4 +30,3 @@ class ProductPage(BasePage):
         add_button = self.browser.find_element(*ProductPageLocators.ADD_BUTTON)
         add_button.click()
         assert self.is_disappeared(*ProductPageLocators.SUCCESS_MESSAGE), 'Element is not disappeared'
-

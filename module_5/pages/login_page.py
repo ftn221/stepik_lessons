@@ -2,6 +2,7 @@ from .base_page import BasePage
 from .locators import LoginPageLocators
 import time
 
+
 class LoginPage(BasePage):
 
     def should_be_login_url(self):
@@ -36,5 +37,3 @@ class LoginPage(BasePage):
         password_input_two.send_keys(password)
         registration_submit_button = self.browser.find_element(*LoginPageLocators.REGISTRATION_SUBMIT_BUTTON)
         registration_submit_button.click()
-
-
