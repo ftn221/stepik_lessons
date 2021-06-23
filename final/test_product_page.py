@@ -11,22 +11,16 @@ add_in_basket_link = "http://selenium1py.pythonanywhere.com/catalogue/the-shellc
 
 class TestProductPage():
     def test_check_math_on_product_page(self, browser):
-        # arrange
         page = ProductPage(browser, add_in_basket_link)
         page.open()
-        # act
         page.click_on_add_button()
-        # assert
         page.solve_quiz_and_get_code()
 
     def test_guest_cant_see_product_in_basket_opened_from_product_page(self, browser, language):
-        # arrange
         page = ProductPage(browser, standart_link)
         basket_page = BasketPage(browser, standart_link)
         page.open()
-        # act
         page.go_to_basket()
-        # assert
         basket_page.check_products_present()
         basket_page.check_message_basket_empty(language)
 
@@ -34,47 +28,34 @@ class TestProductPage():
                                              pytest.param("offer7", marks=pytest.mark.xfail), "offer8", "offer9"])
     class TestProductPageWithParametrize():
         def test_guest_can_add_product_to_basket(self, browser, promo_offer):
-            # Arrange
             page = ProductPage(browser, f'{standart_link}?promo={promo_offer}')
             page.open()
-            # Act
             page.click_on_add_button()
-            # Assert
             page.solve_quiz_and_get_code()
             page.check_the_product_name()
             page.check_the_product_price()
 
     @pytest.mark.xfail(reason="Element should be on page")
     def test_guest_cant_see_success_message_after_adding_product_to_basket(self, browser):
-        # Arrange
         page = ProductPage(browser, standart_link)
-        # Act
         page.open()
-        # Assert
         page.guest_cant_see_success_message_after_adding_product_to_basket()
 
     def test_guest_cant_see_success_message(self, browser):
-        # Arrange
         page = ProductPage(browser, standart_link)
-        # Act
         page.open()
-        # Assert
         page.guest_cant_see_success_message()
 
     @pytest.mark.xfail(reason="Element should be on page")
     def test_message_disappeared_after_adding_product_to_basket(self, browser):
-        # Arrange
         page = ProductPage(browser, standart_link)
-        # Act
         page.open()
-        # Assert
         page.message_disappeared_after_adding_product_to_basket()
 
 
 class TestUserAddToBasketFromProductPage():
     @pytest.fixture(scope='function', autouse=True)
     def setup(self, browser):
-        # Arrange
         page = ProductPage(browser, standart_link)
         page.open()
         login_page = LoginPage(browser, standart_link)
@@ -85,17 +66,12 @@ class TestUserAddToBasketFromProductPage():
         page.should_be_authorized_user()
 
     def test_user_cant_see_success_message(self, browser):
-        # Act
         page = ProductPage(browser, standart_link)
-        # Assert
         page.guest_cant_see_success_message()
 
     def test_user_can_add_product_to_basket(self, browser):
-        # Arrange
         page = ProductPage(browser, standart_link)
-        # Act
         page.open()
         page.click_on_add_button()
-        # Assert
         page.check_the_product_name()
         page.check_the_product_price()

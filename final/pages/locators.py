@@ -31,4 +31,3 @@ class ProductPageLocators():
     PRODUCT_NAME = (By.TAG_NAME, "h1")
     PRODUCT_PRICE = (By.CSS_SELECTOR, ".product_main .price_color")
     BASKET_BUTTON_TEXT = (By.CSS_SELECTOR, ".basket-mini.pull-right")
-    PRODUCT_NAME_ON_MESSAGE = (By.XPATH, '//strong[text()="{}"]')
