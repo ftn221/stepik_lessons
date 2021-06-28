@@ -7,6 +7,9 @@ class BasePageLocators():
     BASKET_LINK = (By.CSS_SELECTOR, '.basket-mini.pull-right > .btn-group a')
     USER_ICON = (By.CSS_SELECTOR, ".icon-user")
     CHARS = 'abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'
+    SEARCH_INPUT = (By.ID, 'id_q')
+    LANGUAGE_SELECT = (By.CSS_SELECTOR, "#language_selector .form-group .form-control")
+    LANGUAGE_SELECT_CHANGE_BUTTON = (By.CSS_SELECTOR, '#language_selector button')
 
 
 class LoginPageLocators():
@@ -31,3 +34,6 @@ class ProductPageLocators():
     PRODUCT_NAME = (By.TAG_NAME, "h1")
     PRODUCT_PRICE = (By.CSS_SELECTOR, ".product_main .price_color")
     BASKET_BUTTON_TEXT = (By.CSS_SELECTOR, ".basket-mini.pull-right")
+    PRODUCT_NAME_ON_MESSAGE = (By.XPATH, '//strong[text()="{}"]')
+    REVIEW_BUTTON = (By.ID, 'write_review')
+    DROPDOWN_MENU = (By.CLASS_NAME, 'dropdown-menu')

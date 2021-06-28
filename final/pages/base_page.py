@@ -4,15 +4,26 @@ from selenium.common.exceptions import NoAlertPresentException
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import Select
 import math
 from .locators import BasePageLocators
-
+import time
 
 class BasePage():
     def __init__(self, browser, url, timeout=10):
         self.browser = browser
         self.url = url
         self.browser.implicitly_wait(timeout)
+
+    def assert_choose_language(self, language):
+        url_now = self.browser.current_url
+        assert url_now.find(language) != -1, 'language not find in substring'
+
+    def choose_language(self, language):
+        select = Select(self.browser.find_element(*BasePageLocators.LANGUAGE_SELECT))
+        select.select_by_value(language)
+        button = self.browser.find_element(*BasePageLocators.LANGUAGE_SELECT_CHANGE_BUTTON)
+        button.click()
 
     def go_to_login_page(self):
         login_link = self.browser.find_element(*BasePageLocators.LOGIN_LINK)
@@ -53,6 +64,9 @@ class BasePage():
             return False
 
         return True
+
+    def is_search_element_present(self):
+        assert self.is_element_present(*BasePageLocators.SEARCH_INPUT), "Search input is not present"
 
     def open(self):
         self.browser.get(self.url)

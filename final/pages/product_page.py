@@ -1,5 +1,6 @@
 from .base_page import BasePage
 from .locators import ProductPageLocators
+from .locators import LoginPageLocators
 from selenium.webdriver.common.by import By
 
 
@@ -26,7 +27,13 @@ class ProductPage(BasePage):
     def guest_cant_see_success_message(self):
         assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), 'Element present on page'
 
+    def guest_cant_see_login_form_on_product_page(self):
+        assert self.is_not_element_present(*LoginPageLocators.LOGIN_FORM), 'Element present on page'
+
     def message_disappeared_after_adding_product_to_basket(self):
         add_button = self.browser.find_element(*ProductPageLocators.ADD_BUTTON)
         add_button.click()
         assert self.is_disappeared(*ProductPageLocators.SUCCESS_MESSAGE), 'Element is not disappeared'
+
+    def review_button_is_present(self):
+        assert self.is_element_present(*ProductPageLocators.REVIEW_BUTTON), 'Element is not present'
